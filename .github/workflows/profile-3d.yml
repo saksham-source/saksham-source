@@ -1,1 +1,45 @@
 
+# Generates the 3D contribution graph shown in the profile README.
+# Output goes to ./profile-3d-contrib/ in this repository.
+name: GitHub-Profile-3D-Contrib
+
+on:
+  schedule:
+    - cron: "0 18 * * *"        # once a day, 18:00 UTC
+  workflow_dispatch:            # lets you run it manually from the Actions tab
+  push:
+    paths:
+      - ".github/workflows/profile-3d.yml"   # runs once when you add this file
+
+permissions:
+  contents: write               # needed to commit the generated images
+
+concurrency:
+  group: profile-3d
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    name: generate-github-profile-3d-contrib
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned to a commit SHA (release 0.7.1) so the action can't change under you.
+      - uses: yoshi389111/github-profile-3d-contrib@fd54cf20784ed9a86dc7be48bb5eb1f74e92b4f8 # 0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
+      - name: Commit generated images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-3d-contrib
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update 3D contribution graph"
+          git push
