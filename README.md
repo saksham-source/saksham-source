@@ -1,3 +1,5 @@
+<img src="https://capsule-render.vercel.app/api?section=header&type=waving&color=gradient&height=150" width="100%" alt="">
+
 <div align="center">
 
 # Saksham Vij
@@ -42,12 +44,20 @@ An interactive, educational simulator of stack-based Bitcoin Script, built for B
 ### Activity
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-green.svg">
-  <img alt="3D view of my GitHub contribution calendar" src="./profile-3d-contrib/profile-green.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/night.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/day.svg">
+  <img alt="Animated 3D view of my GitHub contribution calendar" src="./profile-3d-contrib/day.svg" width="100%">
 </picture>
 
-<br><br>
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./snake/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./snake/github-contribution-grid-snake.svg">
+  <img alt="A snake eating through my GitHub contribution graph" src="./snake/github-contribution-grid-snake.svg" width="100%">
+</picture>
+
+<br>
 
 <a href="https://leetcode.com/u/saksham_source"><img alt="LeetCode stats for saksham_source" src="https://leetcard.jacoblin.cool/saksham_source?hide=ranking&radius=12" width="480"></a>
 
@@ -68,3 +78,5 @@ An interactive, educational simulator of stack-based Bitcoin Script, built for B
 <div align="center">
 <sub>Open to Software Engineering, Cloud, DevOps and Full-Stack internships · <a href="mailto:sakshamvij2005@gmail.com">say hi</a></sub>
 </div>
+
+<img src="https://capsule-render.vercel.app/api?section=footer&type=waving&color=gradient&height=110" width="100%" alt="">
