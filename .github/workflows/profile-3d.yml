@@ -1,15 +1,15 @@
-
-# Generates the 3D contribution graph shown in the profile README.
-# Output goes to ./profile-3d-contrib/ in this repository.
+# Generates the animated profile graphics used in the README:
+#   - 3D contribution calendar (day + night, with growing-bar animation)  -> profile-3d-contrib/
+#   - Contribution snake (light + dark)                                   -> snake/
 name: GitHub-Profile-3D-Contrib
 
 on:
   schedule:
     - cron: "0 18 * * *"        # once a day, 18:00 UTC
-  workflow_dispatch:            # lets you run it manually from the Actions tab
+  workflow_dispatch:            # run manually from the Actions tab
   push:
     paths:
-      - ".github/workflows/profile-3d.yml"   # runs once when you add this file
+      - ".github/workflows/profile-3d.yml"   # runs once whenever this file changes
 
 permissions:
   contents: write               # needed to commit the generated images
@@ -20,26 +20,72 @@ concurrency:
 
 jobs:
   generate:
-    name: generate-github-profile-3d-contrib
+    name: generate-profile-graphics
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
+      # Settings for the 3D calendar: a light "day" version and a dark animated "night" version.
+      # (Values follow the project's own EXAMPLES.md.)
+      - name: Write 3D calendar settings
+        run: |
+          cat > "$RUNNER_TEMP/3d-settings.json" <<'JSON'
+          [
+            {
+              "type": "normal",
+              "fileName": "day.svg",
+              "backgroundColor": "#ffffff",
+              "foregroundColor": "#00000f",
+              "strongColor": "#111133",
+              "weakColor": "gray",
+              "radarColor": "#47a042",
+              "growingAnimation": true,
+              "contribColors": ["#efefef", "#d8e887", "#8cc569", "#47a042", "#1d6a23"]
+            },
+            {
+              "type": "rainbow",
+              "fileName": "night.svg",
+              "backgroundColor": "#00000f",
+              "foregroundColor": "#eeeeff",
+              "strongColor": "rgb(255,200,55)",
+              "weakColor": "#aaaaaa",
+              "radarColor": "rgb(255,200,55)",
+              "growingAnimation": true,
+              "saturation": "50%",
+              "contribLightness": ["20%", "30%", "35%", "40%", "50%"],
+              "duration": "10s",
+              "hueRatio": -7
+            }
+          ]
+          JSON
+
       # Pinned to a commit SHA (release 0.7.1) so the action can't change under you.
-      - uses: yoshi389111/github-profile-3d-contrib@fd54cf20784ed9a86dc7be48bb5eb1f74e92b4f8 # 0.7.1
+      - name: Generate 3D contribution calendar
+        uses: yoshi389111/github-profile-3d-contrib@fd54cf20784ed9a86dc7be48bb5eb1f74e92b4f8 # 0.7.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
+          SETTING_JSON: ${{ runner.temp }}/3d-settings.json
+
+      # The snake is a bonus: if it ever fails, the 3D calendar still gets committed.
+      - name: Generate contribution snake
+        continue-on-error: true
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            snake/github-contribution-grid-snake.svg
+            snake/github-contribution-grid-snake-dark.svg?palette=github-dark
 
       - name: Commit generated images
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile-3d-contrib
+          git add profile-3d-contrib snake
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "chore: update 3D contribution graph"
+          git commit -m "chore: update animated profile graphics"
           git push
