@@ -17,11 +17,7 @@ Currently building **A Cloud for Small Software**, a platform that deploys an im
 
 <br>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=py,ts,react,nextjs,tailwind,nodejs,postgres,docker,kubernetes,githubactions,aws,git&perline=12&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=py,ts,react,nextjs,tailwind,nodejs,postgres,docker,kubernetes,githubactions,aws,git&perline=12&theme=light">
-  <img alt="Python, TypeScript, React, Next.js, Tailwind CSS, Node.js, PostgreSQL, Docker, Kubernetes, GitHub Actions, AWS, Git" src="https://skillicons.dev/icons?i=py,ts,react,nextjs,tailwind,nodejs,postgres,docker,kubernetes,githubactions,aws,git&perline=12&theme=light">
-</picture>
+<img alt="Python, TypeScript, React, Next.js, Tailwind CSS, Node.js, PostgreSQL, Docker, Kubernetes, GitHub Actions, AWS, Git" src="https://skillicons.dev/icons?i=py,ts,react,nextjs,tailwind,nodejs,postgres,docker,kubernetes,githubactions,aws,git">
 
 <sub>Exploring: FastAPI · Celery · Redis · AI agents</sub>
 
@@ -31,12 +27,12 @@ Currently building **A Cloud for Small Software**, a platform that deploys an im
 
 ### Featured work
 
-**A Cloud for Small Software** · *in progress, private repository*
-A simplified cloud platform for students and developers to deploy small apps without managing infrastructure. Import an app and it detects the runtime, framework, ports, dependencies and environment variables, then deploys it as a Docker container. A GitHub Actions pipeline runs PostgreSQL-backed tests, an API health check, a real Docker deployment test, and a type-checked, linted frontend build.
+**A Cloud for Small Software** · *in progress, private repository*<br>
+A simplified cloud platform for students and developers to deploy small apps without managing infrastructure. Import an app and it detects the runtime, framework, ports, dependencies and environment variables, then deploys it as a Docker container. A GitHub Actions pipeline runs PostgreSQL-backed tests, an API health check, a real Docker deployment test, and a type-checked, linted frontend build.<br>
 `Next.js` `React` `TypeScript` `Node.js` `PostgreSQL` `Docker` `Kubernetes` `GitHub Actions`
 
-**[Bitcoin Script Execution Simulator](https://github.com/saksham-source/Bitcoin-Script-Like-Execution-Simulator)**
-An interactive, educational simulator of stack-based Bitcoin Script, built for Blockchain Lab evaluation. It evaluates opcodes step by step while tracking stack state, and accepts a spend only when the final stack satisfies the locking script. Backed by 34 passing Vitest tests.
+**[Bitcoin Script Execution Simulator](https://github.com/saksham-source/Bitcoin-Script-Like-Execution-Simulator)**<br>
+An interactive, educational simulator of stack-based Bitcoin Script, built for Blockchain Lab evaluation. It evaluates opcodes step by step while tracking stack state, and accepts a spend only when the final stack satisfies the locking script. Backed by 34 passing Vitest tests.<br>
 `TypeScript` `Next.js` `Tailwind CSS` `Vitest`
 
 ---
